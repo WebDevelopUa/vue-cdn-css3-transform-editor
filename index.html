@@ -1,0 +1,115 @@
+<!DOCTYPE>
+<html lang="en">
+
+<head>
+    <title> CSS3 Transform Editor | VueJS v3 CDN </title>
+    <link rel="stylesheet"
+          type="text/css"
+          href="main.css"/>
+</head>
+
+<body>
+<div id="app">
+    <h2>VueJS v3 CDN - CSS3 Transform Editor</h2>
+    <main>
+        <section class="settings">
+            <div class="settings-container">
+
+                <!-- bind (input, textarea, select) data() to "v-model" directive -->
+                <label>perspective: {{perspective}}px;
+                    <input type="range"
+                           min="0"
+                           max="999"
+                           v-model="perspective"
+                    />
+                </label>
+
+                <label>rotateX: {{rotateX}}deg;
+                    <input type="range"
+                           min="-180"
+                           max="180"
+                           v-model="rotateX"
+                    />
+                </label>
+
+                <label>rotateY: {{rotateY}}deg;
+                    <input type="range"
+                           min="-180"
+                           max="180"
+                           v-model="rotateY"
+                    />
+                </label>
+
+                <label>rotateZ: {{rotateZ}}deg;
+                    <input type="range"
+                           min="-180"
+                           max="180"
+                           v-model="rotateZ"
+                    />
+                </label>
+
+                <!-- bind onclick methods  -->
+                <div class="buttons">
+                    <button type="button"
+                            @click.prevent="reset"
+                    >Reset
+                    </button>
+                    <button type="button"
+                            @click.prevent="copy"
+                    >Copy
+                    </button>
+                </div>
+
+            </div>
+        </section>
+        <section class="output">
+            <div class="box-container">
+
+                <!-- bind box style property to a computed property box() -->
+                <div id="box"
+                     class="box"
+                     :style="box"
+                ></div>
+
+            </div>
+        </section>
+    </main>
+
+</div>
+
+<css-doodle>
+    :doodle {
+    @grid: 1x3 / 100vmax;
+    position: absolute;
+    top: 0; left: 0;
+    z-index: 0;
+    }
+
+    @size: 100% 150%;
+    position: absolute;
+
+    background: @m(100, (
+    linear-gradient(transparent, @p(
+    #FFFDE1@repeat(2, @p([0-9a-f])),
+    #FB3569@repeat(2, @p([0-9a-f]))
+    ))
+    @r(0%, 100%) @r(0%, 100%) /
+    @r(1px) @r(23vmin)
+    no-repeat
+    ));
+
+    will-change: transform;
+    animation: f 50s linear calc(-50s / @size() * @i()) infinite;
+    @keyframes f {
+    from { transform: translateY(-100%) }
+    to { transform: translateY(100%) }
+    }
+</css-doodle>
+
+<script src="https://unpkg.com/css-doodle@0.6.1/css-doodle.min.js"></script>
+<!--<script src="https://unpkg.com/vue@next"></script>-->
+<script src="https://unpkg.com/vue@3.2.21/dist/vue.global.js"></script>
+<script src="app.js"></script>
+</body>
+
+</html>
